@@ -25,11 +25,6 @@ resource "huaweicloud_vpc_eip_v1" "lb_eip_1" {
 }
 
 
-output "loadbalancer_eip" {
-  # value       = huaweicloud_networking_floatingip_v2.lb_eip_1.address
-  value       = huaweicloud_vpc_eip_v1.lb_eip_1.publicip[*].ip_address
-  description = "The external IP of the Load Balancer"
-}
 
 # https://www.terraform.io/docs/providers/huaweicloud/r/lb_listener_v2.html
 # https://support.huaweicloud.com/en-us/api-elb/en-us_topic_0096561483.html

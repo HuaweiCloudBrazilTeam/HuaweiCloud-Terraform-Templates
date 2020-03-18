@@ -1,0 +1,8 @@
+#!/bin/bash
+timedatectl set-timezone America/Sao_Paulo 
+echo "Hello, the time is now $(date -R)" | tee /output.txt
+
+apt-get update && \
+#apt-get install cockpit --yes && \
+apt-get install nginx --yes
+echo "<h1>Hello from Nginx</h1><br>My hostname is $(hostname)"> /var/www/html/index.html
