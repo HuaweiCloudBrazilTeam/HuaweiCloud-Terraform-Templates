@@ -57,7 +57,7 @@ resource "huaweicloud_as_group_v1" "as_group-green" {
   lbaas_listeners {
     pool_id       = huaweicloud_lb_pool_v2.lb_pool_1.id
     protocol_port = huaweicloud_lb_listener_v2.lb_listener_http.protocol_port
-    weight        = "1" # var.as_group_green_weight
+    weight        = var.as_group_green_weight # var.as_group_green_weight
   }
 }
 
