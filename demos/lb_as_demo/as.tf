@@ -6,9 +6,8 @@ resource "huaweicloud_as_group_v1" "as_group-blue" {
   lifecycle {
     create_before_destroy = true
   }
-  delete_instances = true # 'terraform destroy' náo funciona sem este parâmetro
 
-  scaling_configuration_id = huaweicloud_as_configuration_v1.as_config_blue.id
+  scaling_configuration_id = huaweicloud_as_configuration_v1.as_demo_config_1.id
   vpc_id                   = huaweicloud_vpc_v1.vpc_1.id
   networks {
     id = huaweicloud_vpc_subnet_v1.subnet_1.id
@@ -38,9 +37,8 @@ resource "huaweicloud_as_group_v1" "as_group-green" {
   lifecycle {
     create_before_destroy = true
   }
-  delete_instances = true # 'terraform destroy' náo funciona sem este parâmetro
 
-  scaling_configuration_id = huaweicloud_as_configuration_v1.as_config_green.id
+  scaling_configuration_id = huaweicloud_as_configuration_v1.as_demo_config_1.id
   vpc_id                   = huaweicloud_vpc_v1.vpc_1.id
   networks {
     id = huaweicloud_vpc_subnet_v1.subnet_1.id
@@ -64,8 +62,8 @@ resource "huaweicloud_as_group_v1" "as_group-green" {
 }
 
 # https://www.terraform.io/docs/providers/huaweicloud/r/as_configuration_v1.html
-resource "huaweicloud_as_configuration_v1" "as_config_blue" {
-  scaling_configuration_name = "as_config_blue"
+resource "huaweicloud_as_configuration_v1" "as_demo_config_1" {
+  scaling_configuration_name = "as_demo_config_1"
 
   lifecycle {
     create_before_destroy = true
@@ -95,40 +93,6 @@ resource "huaweicloud_as_configuration_v1" "as_config_blue" {
     }
   }
 }
-
-resource "huaweicloud_as_configuration_v1" "as_config_green" {
-  scaling_configuration_name = "as_config_green"
-
-  lifecycle {
-    create_before_destroy = true
-  }
-
-  instance_config {
-    flavor = "s3.small.1"
-    image  = data.huaweicloud_images_image_v2.ubuntu.id
-    # image = "0a5cc0c2-1a00-4160-bfa4-591b4651de92"
-    disk {
-      size        = 40
-      volume_type = "SATA"
-      disk_type   = "SYS"
-    }
-    key_name  = huaweicloud_compute_keypair_v2.kp_1.name
-    user_data = file("userdata.txt")
-
-    public_ip {
-      eip {
-        ip_type = "5_bgp"
-        bandwidth {
-          size          = 1
-          share_type    = "PER"
-          charging_mode = "traffic"
-        }
-      }
-    }
-  }
-}
-
-
 
 data "huaweicloud_images_image_v2" "ubuntu" {
   name        = "Ubuntu 18.04 server 64bit"
