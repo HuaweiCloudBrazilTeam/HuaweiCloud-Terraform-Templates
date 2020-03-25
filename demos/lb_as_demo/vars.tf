@@ -25,6 +25,6 @@ variable "as_group_blue_weight" {
 }
 
 variable "as_group_green_weight" {
-  default = "2"
+  default = "1"
 }
 
