@@ -9,3 +9,39 @@ Scripts Terraform para utilizar com Huawei Cloud
 Documentação para utilizar Huawei Cloud ou Huawei Cloud Stack Online estão nos endereços abaixo:
 Huawei Cloud : https://www.terraform.io/docs/providers/huaweicloud/index.html
 Huawei Cloud Stack Online : https://www.terraform.io/docs/providers/huaweicloudstack/index.html
+
+
+## Parâmetros de autenticação do provider Terraform **huaweicloud**
+
+O endpoint de autenticação usa o formato _https://iam.<código da região>.myhuaweicloud.com/v3_.
+
+A listagem completa dos endpoints de autenticação (IAM) e de todos outros serviços Huawei Cloud está [nesta página](https://developer.huaweicloud.com/intl/en-us/endpoint).
+
+A definição do provider assume que você está parametrizando a autenticação por variáveis de ambiente.
+
+
+São as seguintes:
+```bash
+export OS_TENANT_NAME=ap-southeast-1 					# nome da região
+export TF_region=$OS_TENANT_NAME # é necessário informar a região, e aqui fazemos por uma varíavel a parte para evitar um conflito com o OpenStackClient
+export OS_AUTH_URL=https://iam.$OS_TENANT_NAME.myhuaweicloud.com/v3	# consulte a lista de endpoints IAM em https://developer.huaweicloud.com/intl/en-us/endpoint
+export OS_DOMAIN_NAME= 							# o nome da conta na Huawei Cloud
+export OS_USERNAME=							# algum usuário da conta (ou o próprio nome da conta, se você ainda não tiver criado usuários)
+export OS_PASSWORD=							# senha da conta ou usuário
+
+# Para provisionar recursos no OBS é necessária autenticação usando Access Key/Secret Key
+# A criação de AK/SK é feita no console IAM. Mais detalhes em: https://support.huaweicloud.com/intl/en-us/usermanual-iam/iam_02_0003.html
+export OS_ACCESS_KEY=
+export OS_SECRET_KEY=
+
+# Não é necessário personalizar variáveis daqui para baixo
+export NOVA_ENDPOINT_TYPE=publicURL 
+export OS_ENDPOINT_TYPE=publicURL 
+export CINDER_ENDPOINT_TYPE=publicURL 
+export OS_VOLUME_API_VERSION=2 
+export OS_IDENTITY_API_VERSION=3 
+export OS_IMAGE_API_VERSION=2
+```
+
+Consulte a página abaixo para mais informaçãoes a respeito do papel de cada uma das variáveis *OS_*
+* https://support.huaweicloud.com/en-us/devg-sdk_cli/en-us_topic_0070637155.html
