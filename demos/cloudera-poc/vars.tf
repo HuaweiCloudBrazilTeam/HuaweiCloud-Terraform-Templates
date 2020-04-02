@@ -1,8 +1,16 @@
+variable "auth_url" {
+  default = "https://iam.myhuaweicloud.com/v3"
+}
+
 variable "project_name" {
   default = "cloudera-demo"
 }
 
 variable "region" {
+  default = "ap-southeast-1"
+}
+
+variable "tenant_name" {
   default = "ap-southeast-1"
 }
 
