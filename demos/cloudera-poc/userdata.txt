@@ -1,0 +1,4 @@
+#cloud-config
+timezone: "America/Sao_Paulo"
+manage_etc_hosts: false
+final_message: "The system is finally up, after $UPTIME seconds"
