@@ -8,7 +8,7 @@ provider "huaweicloud" {
   region = var.region
 }
 
-variable "region" { # OS_TENANT_NAME
+variable "region" { 
   default = "ap-southeast-1"
   # default = "sa-brazil-1"
   description = "A região da Huawei Cloud"
